@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home - Steve Strong Portfolio</title>
+  <style>
+
+    html * {
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+    }
+
+    h1 {
+      font-weight: lighter;
+    }
+
+    #learn-more-text {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #learn-more-buttons {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    /* Responsive Styles (for smaller screens) */
+    @media screen and (max-width: 600px) {
+      .nav-item {
+        float: none;
+        display: block; /* Stack items vertically */
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="navbar"></div>
+
+  <h1>Hello! I'm Steve, a web developer.</h1>
+
+  <p>
+    After 12 years of being a nurse, I decided to take a new direction. I feel very strongly about nutrition and food,
+    both as a source of healthy sustenance and of enjoyment! My work revolves around making it easier for busy people to
+    make healthy food that they enjoy making and eating. 
+  </p>
+
+  <p>
+    Life isn't all about work, though! I enjoy classic literature and video games, among many other things, so I also 
+    work on video games when I have the time and bringing older classics into the new age through interactivity!
+  </p>
+
+  <p> On this site you can find examples of my work as well as a description of why I do the work I do.</p>
+
+  <div id="learn-more-text" >
+    <p> Want to learn more?</p>
+  </div>
+
+  <div id="learn-more-buttons">
+    <button type="button" name="Projects" onclick="window.location.href='projects.html'">View My Projects</button>
+    <button type="button" name="Contact" onclick="window.location.href='contact.html'">Get in Touch</button>
+  </div>
+
+  <script>
+
+    fetch("navbar.html")
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById("navbar").innerHTML = data;
+      })
+      .catch(err => {
+        document.getElementById("navbar").innerHTML = "Error loading navbar";
+      });
+
+  </script>
+</body>
+</html>

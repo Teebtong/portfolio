@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact - Steve Strong Portfolio</title>
+  <style>
+
+  html * {
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+  }
+
+  h1 {
+      font-weight: lighter;
+    }
+
+  /* Responsive Styles (for smaller screens) */
+  @media screen and (max-width: 600px) {
+    .nav-item {
+      float: none;
+      display: block; /* Stack items vertically */
+    }
+  }
+  </style>
+</head>
+<body>
+  <div id="navbar">
+  </div>
+
+  <h1>
+    Skills
+  </h1>
+
+  <ul>
+    <li>12 years of experience as an RN</li>
+    <li>6 years of experience in healthcare management</li>
+    <li>Making websites!</li>
+  </ul>
+
+  <script>
+
+    fetch("navbar.html")
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById("navbar").innerHTML = data;
+      })
+      .catch(err => {
+        document.getElementById("navbar").innerHTML = "Error loading navbar";
+      });
+      
+  </script>
+</body>
+</html>

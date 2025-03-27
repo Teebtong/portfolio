@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact - Steve Strong Portfolio</title>
+  <style>
+
+    html * {
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+      box-sizing: border-box;
+    }
+
+    h1 {
+      font-weight: lighter;
+    }
+
+    .card-carousel {
+      width: 500px;
+      margin: 0 auto;
+      position: relative;
+      height: 400px;
+    }
+
+    .card {
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      width: 300px;
+      background: #fff;
+      position: absolute;
+      top: 0;
+      transition: transform 0.5s ease, filter 0.5s ease, opacity 0.5s ease;
+      overflow: hidden;
+      min-height: 350px; /* Adjust as needed */
+    }
+
+    .container {
+      padding: 16px 8px;
+    }
+
+    .card.active {
+      transform: translateX(-50%);
+      left: 50%;
+      z-index: 2;
+    }
+
+    .card.prev-card {
+      transform: translateX(-80%);
+      left: 40%;
+      filter: blur(2px);
+      opacity: 0.7;
+      z-index: 1;
+    }
+
+    .card.next-card {
+      transform: translateX(-20%);
+      left: 60%;
+      filter: blur(2px);
+      opacity: 0.7;
+      z-index: 1;
+    }
+
+    .prev, .next {
+      cursor: pointer;
+      position: absolute;
+      top: 50%;
+      width: auto;
+      margin-top: -22px;
+      padding: 16px;
+      color: white;
+      font-weight: bold;
+      font-size: 18px;
+      transition: 0.6s ease;
+      border-radius: 0 3px 3px 0;
+      user-select: none;
+      z-index: 3;
+      background-color: rgba(0, 0, 0, 1);
+    }
+
+    .next {
+      right: 0;
+      border-radius: 3px 0 0 3px;
+    }
+
+    .prev:hover, .next:hover {
+      background-color: rgba(0, 0, 0, 0.8);
+    }
+
+    .dot-container {
+      text-align: center;
+      padding: 20px 0;
+      z-index: 3; /* Still above cards */
+      position: absolute; /* Tie to carousel */
+      bottom: -100px; /* Below carousel */
+      left: 50%;
+      transform: translateX(-50%); /* Center it */
+      width: 100%; /* Match carousel width */
+    }
+
+    .dot {
+      cursor: pointer;
+      height: 15px;
+      width: 15px;
+      margin: 0 2px;
+      background-color: #bbb;
+      border-radius: 50%;
+      display: inline-block;
+      transition: background-color 0.6s ease;
+    }
+
+    /* Responsive Styles (for smaller screens) */
+    @media screen and (max-width: 600px) {
+      .nav-item {
+        float: none;
+        display: block; /* Stack items vertically */
+      }
+    }
+
+  </style>
+</head>
+<body>
+  <div id="navbar">
+  </div>
+
+  <h1>
+    Capsule Diet
+  </h1>
+
+  <p>
+    Deciding what to eat is more difficult than it sounds. So many things sound good but how do you choose? Additionally, making last-minute decisions when you're already hungry is a recipe for disaster!
+  </p>
+  <p>
+    Luckily, there's an easier approach than trying to come up with 21 (or more!) meals in a week without resorting to panic meals or eating the same things over and over. 
+  </p>
+  <p>
+    Capsule Diet uses the approach of a capsule wardobe to help streamline food decisions. That means identify a number of ingredients and foods that can be endlessly remixed to come up with different meals,
+    which simplifies shopping while not sacrificing variety and nutrition!
+  </p>
+
+  <h2>Here's how it works:</h2>
+
+  <div class="card-carousel">
+    <div class="card" id="step-1">
+    <img src="https://assets.grok.com/users/a0326eda-4940-4fb7-849e-47476dcaf791/generated/JgwrTEqJozXOLp6B/image.jpg" 
+    alt="Step 1" style="width:100%">
+        <div class="container">
+            <h4><b>Step 1 - Add Your Favorite Foods</b></h4>
+            <p>Add a variety of foods you enjoy and watch them be endlessly remixed into new and interesting dishes</p>
+         </div>
+    </div>
+
+    <div class="card"  id="step-2">
+        <img src="https://assets.grok.com/users/a0326eda-4940-4fb7-849e-47476dcaf791/generated/kEz625A0dsvSvG3O/image.jpg" 
+        alt="Step 2" style="width:100%">
+        <div class="container">
+             <h4><b>Step 2 - Identify Recipe Patterns</b></h4>
+             <p>Here's were things are a bit different; by identifying patterns instead of only individual recipes, you'll get new recommendations of things that are familiar but new!</p>
+        </div>
+    </div>
+
+    <div class="card"  id="step-3">
+        <img src="https://assets.grok.com/users/a0326eda-4940-4fb7-849e-47476dcaf791/generated/HkadpGyecP45BDDG/image.jpg"
+        alt="Step 3" style="width:100%">
+        <div class="container">
+            <h4><b>Step 3</b></h4>
+            <p>Get a menu plan for whatever time period you need, whether it's this month or just tomorrow!</p>
+        </div>
+    </div>
+    
+    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+    <a class="next" onclick="plusSlides(1)">&#10095;</a>
+
+    <div class="dot-container">
+      <span class="dot" onclick="currentSlide(1)"></span> 
+      <span class="dot" onclick="currentSlide(2)"></span> 
+      <span class="dot" onclick="currentSlide(3)"></span> 
+    </div>
+ </div>
+
+  <script>
+
+    fetch("navbar.html")
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById("navbar").innerHTML = data;
+      })
+      .catch(err => {
+        document.getElementById("navbar").innerHTML = "Error loading navbar";
+      });
+      
+    var slideIndex = 1;
+    showSlides(slideIndex);
+
+    // Match all card heights to the tallest
+    var cards = document.getElementsByClassName("card");
+    var maxHeight = 0;
+    for (var i = 0; i < cards.length; i++) {
+      var cardHeight = cards[i].offsetHeight;
+      if (cardHeight > maxHeight) {
+        maxHeight = cardHeight;
+      }
+    }
+    for (var i = 0; i < cards.length; i++) {
+      cards[i].style.height = maxHeight + "px";
+    }
+
+    function plusSlides(n) {
+      var slides = document.getElementsByClassName("card");
+      var currentActive = slides[slideIndex - 1]; // Current active card
+      var newIndex = slideIndex + n;
+
+      // Handle wrap-around
+      if (newIndex > slides.length) { newIndex = 1; }
+      if (newIndex < 1) { newIndex = slides.length; }
+
+      // Pre-shift the active card based on direction
+      if (n > 0) {
+        // Moving forward: active slides under next
+        currentActive.style.zIndex = "1"; // Under next-card
+        currentActive.style.transform = "translateX(-20%)"; // To next-card spot
+        currentActive.style.filter = "blur(2px)";
+        currentActive.style.opacity = "0.7";
+      } else {
+        // Moving backward: active slides over prev
+        currentActive.style.zIndex = "3"; // Over prev-card
+        currentActive.style.transform = "translateX(-80%)"; // To prev-card spot
+        currentActive.style.filter = "blur(2px)";
+        currentActive.style.opacity = "0.7";
+      }
+
+      // Update slideIndex and reassign classes after transition
+      slideIndex = newIndex;
+      setTimeout(() => {
+        showSlides(slideIndex);
+        // Reset inline styles to let CSS take over
+        currentActive.style.zIndex = "";
+        currentActive.style.transform = "";
+        currentActive.style.filter = "";
+        currentActive.style.opacity = "";
+      }, 250); 
+    }
+
+    function currentSlide(n) {
+      slideIndex = n;
+      showSlides(slideIndex);
+    }
+
+    function showSlides(n) {
+      var slides = document.getElementsByClassName("card");
+      var dots = document.getElementsByClassName("dot");
+
+      if (n > slides.length) { slideIndex = 1; }
+      if (n < 1) { slideIndex = slides.length; }
+
+      for (var i = 0; i < slides.length; i++) {
+        slides[i].classList.remove("prev-card", "active", "next-card");
+        dots[i].className = dots[i].className.replace(" active", "");
+      }
+
+      var prevIndex = (slideIndex - 2 + slides.length) % slides.length;
+      var activeIndex = slideIndex - 1;
+      var nextIndex = slideIndex % slides.length;
+
+      slides[prevIndex].classList.add("prev-card");
+      slides[activeIndex].classList.add("active");
+      slides[nextIndex].classList.add("next-card");
+
+      dots[activeIndex].className += " active";
+    }
+
+  </script>
+  </body>
+</html>
