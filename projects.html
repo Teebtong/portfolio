@@ -176,7 +176,7 @@
       });
 
     // Get all cards
-    var cards = document.querySelectorAll(".card");
+    const cards = document.querySelectorAll(".card");
     cards.forEach(card => {
         const modal = document.querySelector(`#${card.id} .modal`);
         const btn = document.querySelector(`#${card.id} .project-button`);
@@ -202,8 +202,8 @@
 
         // Card redirect
         card.addEventListener("click", function() {
-            var modals = document.querySelectorAll(".modal");
-            var isModalOpen = Array.from(modals).some(modal => modal.style.display === "block");
+            const modals = document.querySelectorAll(".modal");
+            const isModalOpen = Array.from(modals).some(modal => modal.style.display === "block");
             if (!isModalOpen) {
                 if (card.id === "capsule-diet") window.location.href = "capsule-diet.html";
                 else if (card.id === "capsule-wardrobe") window.location.href = "capsule-wardrobe.html";
