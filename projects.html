@@ -124,6 +124,49 @@
         margin: 0px 0px 10px 0px;
     }
 
+    table th {
+      text-align: left;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      margin: 20px 0;
+      background-color: #fff;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    table th {
+      padding: 16px 24px;
+      background-color: #60586F;
+      font-weight: 600;
+      border-bottom: 2px solid #6F585C;
+      color: #fff;
+    }
+
+    table td {
+      vertical-align: middle;
+      padding: 16px 24px;
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    table tr:last-child td {
+      border-bottom: none;
+    }
+
+    table tr:hover {
+      background-color: #f1f1f1;
+      transition: background-color 0.2s ease;
+    }
+
+    table .project-button {
+      margin: 0;
+      display: inline-block;
+    }
+
   </style>
 </head>
 <body>
@@ -192,6 +235,73 @@
 
   <h1>Project Timeline</h1>
 
+    <table>
+      <tr>
+        <th>Project Title</th>
+        <th>Project Duration</th>
+        <th>Status</th>
+        <th>Preview</th>
+        <th>Project Link</th>
+      </tr>
+      <tr>
+        <td>Capsule Diet</td>
+        <td>Q1 2025 - Q2 2025</td>
+        <td>In Progress</td>
+        <td>
+          <button type="button" class="project-button">Preview</button>
+          <div id="diet-modal-timeline" class="modal">
+            <div class="modal-content">
+              <span class="close">&times;</span>
+              <p>
+                An app that uses modularity to make menu planning easier! Get recipe ideas based on user-defined patterns and favorite ingredients.
+              </p>
+            </div>
+          </div>
+        </td>
+        <td>
+          <a href="capsule-diet.html" class="project-button">View Project</a>
+        </td>
+      </tr>
+      <tr>
+        <td>Capsule Wardrobe</td>
+        <td>Q3 2025 -Q4 2025</td>
+        <td>In Progress</td>
+        <td>
+          <button type="button" class="project-button">Preview</button>
+          <div id="wardrobe-modal-timeline" class="modal">
+            <div class="modal-content">
+              <span class="close">&times;</span>
+              <p>
+                Create dozens of outfits from just a few essentials! This app shows you the way. 
+              </p>
+            </div>
+          </div>
+        </td>
+        <td>
+          <a href="capsule-wardrobe.html" class="project-button">View Project</a>
+        </td>
+      </tr>
+      <tr>
+        <td>The Faerie Queene RPG</td>
+        <td>2026 TBD</td>
+        <td>In Development</td>
+        <td>
+          <button type="button" class="project-button">Preview</button>
+          <div id="fq-modal-timeline" class="modal">
+            <div class="modal-content">
+              <span class="close">&times;</span>
+              <p>
+                An old favorite for a new age! One of the brightest gems of English poetry made interactive. 
+              </p>
+            </div>
+          </div>
+        </td>
+        <td>
+          <a href="faerie-queene.html" class="project-button">View Project</a>
+        </td>
+      </tr>     
+    </table>
+
   <script>
 
     fetch("navbar.html")
@@ -203,8 +313,11 @@
         document.getElementById("navbar").innerHTML = "Error loading navbar";
       });
 
-    // Get all cards
+    // Get all cards and timeline buttons
     const cards = document.querySelectorAll(".card");
+    const timelineButtons = document.querySelectorAll("table .project-button");
+    
+    // Handle card modals
     cards.forEach(card => {
         const modal = document.querySelector(`#${card.id} .modal`);
         const btn = document.querySelector(`#${card.id} .project-button`);
@@ -227,24 +340,37 @@
         modalContent.onclick = function(event) {
             event.stopPropagation();
         };
+    });
 
-        // Card redirect
-        card.addEventListener("click", function() {
-            const modals = document.querySelectorAll(".modal");
-            const isModalOpen = Array.from(modals).some(modal => modal.style.display === "block");
-            if (!isModalOpen) {
-                if (card.id === "capsule-diet") window.location.href = "capsule-diet.html";
-                else if (card.id === "capsule-wardrobe") window.location.href = "capsule-wardrobe.html";
-                else if (card.id === "fq-rpg") window.location.href = "faerie-queene.html";
-            }
-        });
+    // Handle timeline modals
+    timelineButtons.forEach(btn => {
+        const modal = btn.nextElementSibling;
+        const span = modal.querySelector('.close');
+        const modalContent = modal.querySelector('.modal-content');
+
+        // Button opens modal
+        btn.onclick = function(event) {
+            event.stopPropagation();
+            modal.style.display = "block";
+        };
+
+        // Close button hides modal
+        span.onclick = function(event) {
+            event.stopPropagation();
+            modal.style.display = "none";
+        };
+
+        // Clicking modal content doesn't bubble up
+        modalContent.onclick = function(event) {
+            event.stopPropagation();
+        };
     });
 
     // Global click to close modal when clicking outside of modal box
     window.onclick = function(event) {
-    if (event.target.className === "modal") {
-        event.target.style.display = "none";
-    }
+        if (event.target.className === "modal") {
+            event.target.style.display = "none";
+        }
     };
      
     </script>
